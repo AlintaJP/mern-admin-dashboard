@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   LightModeOutlined,
   DarkModeOutlined,
@@ -6,11 +6,11 @@ import {
   Search,
   SettingsOutlined,
   ArrowDropDownOutlined,
-} from '@mui/icons-material';
-import FlexBetween from 'components/FlexBetween';
-import { useDispatch } from 'react-redux';
-import { setMode } from 'redux/globalSlice';
-import profileImage from 'assets/profile.jpg';
+} from "@mui/icons-material";
+import FlexBetween from "components/FlexBetween";
+import { useDispatch } from "react-redux";
+import { setMode } from "redux/globalSlice";
+import profileImage from "assets/profile.jpg";
 import {
   AppBar,
   Box,
@@ -22,7 +22,7 @@ import {
   Toolbar,
   Typography,
   useTheme,
-} from '@mui/material';
+} from "@mui/material";
 
 const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
@@ -34,81 +34,81 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const handleClose = () => setAnchorEl(null);
 
   return (
-    <AppBar sx={{ position: 'static', background: 'none', boxShadow: 'none' }}>
-      <Toolbar sx={{ justifyContent: 'space-between' }}>
+    <AppBar sx={{ position: "static", background: "none", boxShadow: "none" }}>
+      <Toolbar sx={{ justifyContent: "space-between" }}>
         <FlexBetween>
           <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             <MenuIcon />
           </IconButton>
           <FlexBetween
             backgroundColor={theme.palette.background.alt}
-            borderRadius="9px"
-            gap="3rem"
-            p="0.1rem 1.5rem"
+            borderRadius='9px'
+            gap='3rem'
+            p='0.1rem 1.5rem'
           >
-            <InputBase placeholder="Search..." />
+            <InputBase placeholder='Search...' />
             <IconButton>
               <Search />
             </IconButton>
           </FlexBetween>
         </FlexBetween>
 
-        <FlexBetween gap="1.5rem">
+        <FlexBetween gap='1.5rem'>
           <IconButton onClick={() => dispatch(setMode())}>
-            {theme.palette.mode === 'dark' ? (
-              <DarkModeOutlined sx={{ fontSize: '25px' }} />
+            {theme.palette.mode === "dark" ? (
+              <DarkModeOutlined sx={{ fontSize: "25px" }} />
             ) : (
-              <LightModeOutlined sx={{ fontSize: '25px' }} />
+              <LightModeOutlined sx={{ fontSize: "25px" }} />
             )}
           </IconButton>
           <IconButton>
-            <SettingsOutlined sx={{ fontSize: '25px' }} />
+            <SettingsOutlined sx={{ fontSize: "25px" }} />
           </IconButton>
 
           <FlexBetween>
             <Button
               onClick={handleClick}
               sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                textTransform: 'none',
-                gap: '1rem',
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                textTransform: "none",
+                gap: "1rem",
               }}
             >
               <Box
-                component="img"
-                alt="profile"
+                component='img'
+                alt='profile'
                 src={profileImage}
-                height="32px"
-                width="32px"
-                borderRadius="50%"
-                sx={{ objectFit: 'cover' }}
+                height='32px'
+                width='32px'
+                borderRadius='50%'
+                sx={{ objectFit: "cover" }}
               />
-              <Box textAlign="left">
+              <Box textAlign='left'>
                 <Typography
-                  fontWeight="bold"
-                  fontSize="0.85rem"
+                  fontWeight='bold'
+                  fontSize='0.85rem'
                   sx={{ color: theme.palette.secondary[100] }}
                 >
                   {user.name}
                 </Typography>
                 <Typography
-                  fontSize="0.75rem"
+                  fontSize='0.75rem'
                   sx={{ color: theme.palette.secondary[200] }}
                 >
                   {user.occupation}
                 </Typography>
               </Box>
               <ArrowDropDownOutlined
-                sx={{ color: theme.palette.secondary[300], fontSize: '25px' }}
+                sx={{ color: theme.palette.secondary[300], fontSize: "25px" }}
               />
             </Button>
             <Menu
               anchorEl={anchorEl}
               open={isOpen}
               onClose={handleClose}
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
               <MenuItem onClick={handleClose}>Log Out</MenuItem>
             </Menu>
