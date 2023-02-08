@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Box,
   Card,
@@ -10,9 +10,10 @@ import {
   Rating,
   useTheme,
   useMediaQuery,
-} from "@mui/material";
-import Header from "components/Header";
-import { useGetProductsQuery } from "../../redux/api";
+} from '@mui/material';
+import Header from 'components/Header';
+import { useGetProductsQuery } from '../../redux/api';
+import Loader from 'components/Loader';
 
 const Product = ({
   _id,
@@ -30,9 +31,9 @@ const Product = ({
   return (
     <Card
       sx={{
-        backgroundImage: "none",
+        backgroundImage: 'none',
         backgroundColor: theme.palette.background.alt,
-        borderRadius: "0.55rem",
+        borderRadius: '0.55rem',
       }}
     >
       <CardContent>
@@ -43,18 +44,18 @@ const Product = ({
         >
           {category}
         </Typography>
-        <Typography sx={{ mb: "1.5rem" }} color={theme.palette.secondary[400]}>
+        <Typography sx={{ mb: '1.5rem' }} color={theme.palette.secondary[400]}>
           ${Number(price).toFixed(2)}
         </Typography>
         <Rating value={rating} readOnly />
 
-        <Typography variant='body2'>{description}</Typography>
+        <Typography variant="body2">{description}</Typography>
       </CardContent>
 
       <CardActions>
         <Button
-          variant='primary'
-          size='small'
+          variant="primary"
+          size="small"
           onClick={() => setIsExpanded(!isExpanded)}
         >
           See More
@@ -62,7 +63,7 @@ const Product = ({
       </CardActions>
       <Collapse
         in={isExpanded}
-        timeout='auto'
+        timeout="auto"
         unmountOnExit
         sx={{
           color: theme.palette.neutral[300],
@@ -89,20 +90,20 @@ const Product = ({
 
 const Products = () => {
   const { data, isLoading, isError } = useGetProductsQuery();
-  const isNonMobile = useMediaQuery("(min-width: 1000px)");
+  const isNonMobile = useMediaQuery('(min-width: 1000px)');
 
   return (
-    <Box m='1.5rem 2.5rem'>
-      <Header title='PRODUCTS' subtitle='See your list of products.' />
+    <Box m="1.5rem 2.5rem">
+      <Header title="PRODUCTS" subtitle="See your list of products." />
       {data || !isLoading ? (
         <Box
-          mt='20px'
-          display='grid'
-          gridTemplateColumns='repeat(4, minmax(0 ,1fr))'
-          justifyContent='space-between'
-          rowGap='20px'
-          columnGap='1.33%'
-          sx={{ "& > div": { gridColumn: isNonMobile ? undefined : "span 4" } }}
+          mt="20px"
+          display="grid"
+          gridTemplateColumns="repeat(4, minmax(0 ,1fr))"
+          justifyContent="space-between"
+          rowGap="20px"
+          columnGap="1.33%"
+          sx={{ '& > div': { gridColumn: isNonMobile ? undefined : 'span 4' } }}
         >
           {data.map(
             ({
@@ -130,7 +131,14 @@ const Products = () => {
           )}
         </Box>
       ) : (
-        <>Loading...</>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="80vh"
+        >
+          <Loader />
+        </Box>
       )}
     </Box>
   );
